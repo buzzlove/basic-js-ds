@@ -5,33 +5,36 @@ class ListNode {
   }
 }
 
-class Stack {
-    constructor (){
-        this.root = [];
-    }
-    push(el) {
-      this.root.push(el);
-    }
-  
-    pop() {
-      let a = this.peek();
-      this.root.pop(this.root[this.root.length-1]);
-      return a;
-    }
-  
-    peek() {
-      console.log (this.root[this.root.length-1]);
-    }
+
+class Queue {
+  constructor(){
+    this.data = [];
   }
+   getUnderlyingList() {
+     console.log (this.data);
+   } 
+   enqueue(value) {
+     const NEXT = this.data[0] ? this.data[0].value : null;
+     const NEW_VALUE = new ListNode(value);
+     this.data.unshift(NEW_VALUE);
+     this.data[0].next = NEXT;
+   } 
+   dequeue() {  
+     const POP_LAST_VALUE = this.data[this.data.length-1].value;
+     const LAST = this.data[this.data.length-2];
+     LAST.next = null;
+     this.data.pop();
+     return POP_LAST_VALUE;
+   }
+ }
 
   
-  const stack = new Stack();
+  const queue = new Queue();
  
-  stack.push(5);
-  stack.push(6);
-  stack.push(7);
-stack.peek()//, 7);
-stack.pop()//, 7);
-stack.peek()//, 6)
-
-console.log(stack)
+  queue.enqueue(5);
+  queue.enqueue(6);
+  queue.enqueue(7);
+ queue.getUnderlyingList();
+ //queue.dequeue()//, 5);
+// queue.getUnderlyingList();
+//queue.dequeue()//, 6);
